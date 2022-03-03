@@ -8,6 +8,12 @@ use App\Http\Controllers\Controller;
 // 以下を追記することでNews Modelが扱えるようになる
 use App\Profile;
 
+use App\ProfileHistory;
+
+// 以下を追記
+use Carbon\Carbon;
+
+
 class ProfileController extends Controller
 {
     //
@@ -80,26 +86,32 @@ class ProfileController extends Controller
           $path = $request->file('image')->store('public/image');
           $profile_form['image_path'] = basename($path);
       } else {
-          $profile_form['image_path'] = $news->image_path;
+          $profile_form['image_path'] = $profile->image_path;
       }
 
-      unset($profile_form['image']);
+      unset($profile_form['image_path']);
       unset($profile_form['remove']);
       unset($profile_form['_token']);
 
       // 該当するデータを上書きして保存する
       $profile->fill($profile_form)->save();
+      
+      // 以下を追記
+        $history = new ProfileHistory();
+        $history->profile_id = $profile->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
 
       return redirect('admin/profile/');
       
   }
     
-    public function delete(Request $request)
-  {
+    //public function delete(Request $request)
+  //{
       // 該当するNews Modelを取得
-      $profile = profile::find($request->id);
+      //$profile = profile::find($request->id);
       // 削除する
-      $profile->delete();
-      return redirect('admin/profile/');
-  }
+      //$profile->delete();
+      //return redirect('admin/profile/');
+  //}
 }    

@@ -13,7 +13,7 @@
             <div class="col-md-8">
                 <form action="{{ action('Admin\ProfileController@index') }}" method="get">
                     <div class="form-group row">
-                        <label class="col-md-2">氏名</label>
+                        <label class="col-md-2"></label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="cond_title" value={{ $cond_title }}>
                         </div>
@@ -38,17 +38,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $news)
+                            @foreach($posts as $profile)
                                 <tr>
-                                    <th>{{ $news->id }}</th>
-                                    <td>{{ str_limit($news->title, 100) }}</td>
-                                    <td>{{ str_limit($news->body, 250) }}</td>
+                                    <th>{{ $profile->id }}</th>
+                                    <td>{{ str_limit($profile->title, 100) }}</td>
+                                    <td>{{ str_limit($profile->body, 250) }}</td>
                                     <td>
                                         <div>
-                                            <a href="{{ action('Admin\ProfileController@edit', ['id' => $news->id]) }}">編集</a>
+                                            <a href="{{ action('Admin\ProfileController@edit', ['id' => $profile->id]) }}">編集</a>
                                         </div>
                                         <div>
-                                            <a href="{{ action('Admin\ProfileController@delete', ['id' => $news->id]) }}">削除</a>
+                                            <a href="{{ action('Admin\ProfileController@delete', ['id' => $profile->id]) }}">削除</a>
                                         </div>
                                     </td>
                                 </tr>
