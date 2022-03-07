@@ -30,8 +30,11 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::post('profile/create', 'Admin\ProfileController@create');
     Route::get('profile', 'Admin\ProfileController@index');
     Route::get('profile/delete', 'Admin\ProfileController@delete');
+    
+    
 });
-
+    Route::get('/', 'NewsController@index');
+    Route::get('/profile', 'ProfileController@index');
     Route::get('XXX', 'AAAController@bbb');
     
     Auth::routes();
